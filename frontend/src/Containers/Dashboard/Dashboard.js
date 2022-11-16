@@ -55,6 +55,19 @@ export default function Dashboard() {
       })
   }
 
+  const changeAuthor = (myAuth, id) => {
+    console.log(myAuth)
+    axios.post('http://localhost:8080/api/v1/posts/changeAuthor/' + id + "/" + myAuth)
+
+      .then(response => {
+        console.log(response)
+        fetchPosts();
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   useEffect(() => {
     fetchPosts();
   }, [])
@@ -70,10 +83,7 @@ export default function Dashboard() {
     console.log(id);
   }
 
-  const changeAuthor = (myAuth) => {
-    postState[0].author = myAuth
-    setPostState(postState)
-  }
+
 
   const setDetailHandler = (id) => {
     const detail = postState.filter(p => p.id == id);
